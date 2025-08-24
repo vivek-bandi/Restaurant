@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rustic Spoon — Fresh • Local • Seasonal</title>
+    <meta
+      name="description"
+      content="Rustic Spoon is a neighborhood restaurant serving fresh, seasonal cuisine. Explore our menu highlights, hours, location, and contact info."
+    />
+    <meta
+      property="og:title"
+      content="Rustic Spoon — Fresh • Local • Seasonal"
+    />
+    <meta
+      property="og:description"
+      content="Neighborhood restaurant with a seasonal menu. View hours, location, and contact details."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600&auto=format&fit=crop"
+    />
+    <meta name="theme-color" content="#0b1d1a" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b1d1a; /* Deep green */
+        --panel: #102824; /* Slightly lighter */
+        --text: #f4f7f6; /* Off white */
+        --muted: #cfe1dc; /* Muted mint */
+        --accent: #e2b714; /* Warm gold */
+        --accent-2: #9ad8c2; /* Aqua */
+        --error: #ff6b6b;
+        --maxw: 1200px;
+        --radius: 16px;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6;
+        font-size: 16px;
+      }
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+      .skip-link:focus {
+        position: fixed;
+        left: 1rem;
+        top: 1rem;
+        width: auto;
+        height: auto;
+        padding: 0.75rem 1rem;
+        background: #000;
+        color: #fff;
+        z-index: 9999;
+        border-radius: 8px;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(8px);
+        background: rgba(16, 40, 36, 0.7);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .nav {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        color: var(--text);
+      }
+      .logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, var(--accent), #b08900);
+        display: grid;
+        place-items: center;
+        box-shadow: var(--shadow);
+      }
+      .logo svg {
+        width: 24px;
+        height: 24px;
+      }
+      .brand-name {
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        font-size: 1.15rem;
+      }
+      nav ul {
+        display: flex;
+        gap: 1rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.5rem 0.75rem;
+        border-radius: 10px;
+      }
+      nav a:hover,
+      nav a:focus {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.06);
+        outline: none;
+      }
+      .menu-toggle {
+        display: none;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: var(--text);
+        padding: 0.5rem 0.75rem;
+        border-radius: 10px;
+      }
+
+      .hero {
+        position: relative;
+        isolation: isolate;
+      }
+      .hero img.bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.5) saturate(0.9);
+        z-index: -1;
+      }
+      .hero .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 6rem 1rem 4rem;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 2rem;
+      }
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2rem, 4.5vw, 3.2rem);
+        margin: 0.25rem 0 1rem;
+        line-height: 1.2;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(154, 216, 194, 0.15);
+        color: var(--accent-2);
+        border: 1px solid rgba(154, 216, 194, 0.35);
+        padding: 0.4rem 0.7rem;
+        border-radius: 999px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        font-size: 0.85rem;
+      }
+      .cta {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1rem;
+        flex-wrap: wrap;
+      }
+      .btn {
+        appearance: none;
+        border: 0;
+        padding: 0.8rem 1rem;
+        border-radius: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .btn.primary {
+        background: linear-gradient(135deg, var(--accent), #d6a200);
+        color: #1b1400;
+      }
+      .btn.ghost {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--text);
+        background: transparent;
+      }
+
+      .section {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 3rem 1rem;
+      }
+      .grid {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.02)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+      .card h3 {
+        margin: 0 0 0.5rem;
+        font-family: "Playfair Display", serif;
+      }
+      .card .inner {
+        padding: 1rem;
+      }
+
+      /* Menu cards */
+      .menu-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+      .menu-item {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+      }
+      .menu-item img {
+        width: 72px;
+        height: 72px;
+        border-radius: 12px;
+        object-fit: cover;
+        flex: none;
+      }
+      .price {
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .tag {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #0c2a23;
+        background: var(--accent-2);
+        padding: 0.2rem 0.5rem;
+        border-radius: 999px;
+      }
+
+      /* Info blocks */
+      .info-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+      .info-item {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      /* Gallery */
+      .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+      .gallery img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+
+      footer {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        background: #0a1816;
+      }
+      .footer-inner {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+      }
+      .small {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      /* Mobile */
+      @media (max-width: 900px) {
+        .hero .wrap {
+          grid-template-columns: 1fr;
+          padding: 5rem 1rem 3rem;
+        }
+        nav ul {
+          display: none;
+        }
+        .menu-toggle {
+          display: inline-block;
+        }
+        .mobile-nav {
+          display: none;
+          padding: 0.5rem 1rem 1rem;
+        }
+        .mobile-nav.open {
+          display: block;
+        }
+        .mobile-nav a {
+          display: block;
+          margin: 0.25rem 0;
+          color: var(--muted);
+          text-decoration: none;
+          padding: 0.5rem;
+          border-radius: 10px;
+        }
+        .mobile-nav a:hover,
+        .mobile-nav a:focus {
+          color: var(--text);
+          background: rgba(255, 255, 255, 0.06);
+        }
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header role="banner">
+      <div class="nav" aria-label="Primary">
+        <a class="brand" href="#home">
+          <span class="logo" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 3c-1.5 2.5-1 4 0 5s1.5 2.5 0 5c3-1 4-3 4-5s-1-4-4-5Z"
+                fill="#1b1400"
+              />
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="#1b1400"
+                stroke-width="2"
+              />
+            </svg>
+          </span>
+          <span class="brand-name">Rustic Spoon</span>
+        </a>
+        <nav>
+          <button
+            class="menu-toggle"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+          >
+            Menu
+          </button>
+          <ul class="desktop-nav" aria-label="Sections">
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#hours">Hours</a></li>
+            <li><a href="#location">Location</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section id="home" class="hero" aria-label="Hero">
+      <img
+        class="bg"
+        src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1920&auto=format&fit=crop"
+        alt="Rustic dining table with seasonal dishes and warm ambiance"
+      />
+      <div class="wrap">
+        <div>
+          <span class="pill" aria-live="polite"
+            >Now taking weekend bookings</span
+          >
+          <h1>Fresh • Local • Seasonal</h1>
+          <p class="small">
+            A neighborhood restaurant celebrating local farms and bold flavors.
+            Dine-in, takeaway, and catering available.
+          </p>
+          <div class="cta" role="group" aria-label="Primary actions">
+            <a class="btn primary" href="#menu">View Menu</a>
+            <a class="btn ghost" href="#contact">Book a Table</a>
+          </div>
+        </div>
+        <div class="card" aria-label="Today at Rustic Spoon">
+          <div class="inner">
+            <h3>Today’s Highlights</h3>
+            <ul>
+              <li>
+                Truffle Mushroom Risotto <span class="tag">Vegetarian</span>
+              </li>
+              <li>Citrus Glazed Salmon</li>
+              <li>
+                Charred Broccoli & Quinoa Bowl <span class="tag">Vegan</span>
+              </li>
+            </ul>
+            <p class="small">
+              Ask about gluten-free options. We accommodate most allergies.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main id="main" tabindex="-1">
+      <section id="menu" class="section" aria-labelledby="menu-title">
+        <h2 id="menu-title" class="visually-hidden">Menu Highlights</h2>
+        <div class="grid menu-grid">
+          <article class="card" aria-label="Starter: Heirloom Tomato Salad">
+            <img
+              src="images/tomato.jpg"
+              width="500px"
+              alt="Heirloom tomato salad with basil and burrata"
+            />
+            <div class="inner">
+              <div class="menu-item">
+                <img src="images/tom2.jpg" alt="Close-up of tomato salad" />
+                <div>
+                  <h3>Heirloom Tomato Salad</h3>
+                  <p class="small">Burrata, basil oil, toasted pine nuts.</p>
+                  <div class="price">₹420</div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card" aria-label="Main: Wood-fired Margherita Pizza">
+            <img
+              src="images/pizza.jpg"
+              width="500px"
+              alt="Wood-fired margherita pizza with fresh basil"
+            />
+            <div class="inner">
+              <div class="menu-item">
+                <img
+                  src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=300&auto=format&fit=crop"
+                  alt="Slice of margherita pizza"
+                />
+                <div>
+                  <h3>Margherita Pizza</h3>
+                  <p class="small">San Marzano tomatoes, mozzarella, basil.</p>
+                  <div class="price">₹560</div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card" aria-label="Main: Citrus Glazed Salmon">
+            <img
+              src="images/citrus.webp"
+              width="500px"
+              alt="Citrus glazed salmon with greens"
+            />
+            <div class="inner">
+              <div class="menu-item">
+                <img src="images/lemon.jpg" alt="Close-up of salmon fillet" />
+                <div>
+                  <h3>Citrus Glazed Salmon</h3>
+                  <p class="small">
+                    Charred lemon, herb butter, seasonal greens.
+                  </p>
+                  <div class="price">₹780</div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <p class="small" style="margin-top: 1rem; color: var(--muted)">
+          Prices inclusive of taxes. <strong>Allergens:</strong> dairy, nuts,
+          gluten (on request, we can adapt).
+        </p>
+      </section>
+
+      <section id="hours" class="section" aria-labelledby="hours-title">
+        <h2 id="hours-title" class="visually-hidden">Hours of Operation</h2>
+        <div class="grid info-grid">
+          <div class="card">
+            <div class="inner">
+              <h3>Hours</h3>
+              <ul aria-label="Opening hours">
+                <li>Mon–Thu: 12:00 – 22:00</li>
+                <li>Fri: 12:00 – 23:00</li>
+                <li>Sat: 10:00 – 23:00 (Brunch 10:00 – 14:00)</li>
+                <li>Sun: 10:00 – 21:00</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card">
+            <div class="inner">
+              <h3>Contact</h3>
+              <p aria-label="Phone number">
+                📞
+                <a href="tel:+911234567890" style="color: var(--accent-2)"
+                  >+91 12345 67890</a
+                >
+              </p>
+              <p aria-label="Email address">
+                ✉️
+                <a
+                  href="mailto:hello@rusticspoon.example"
+                  style="color: var(--accent-2)"
+                  >hello@rusticspoon.example</a
+                >
+              </p>
+              <p aria-label="Reservations">
+                🗓️ WhatsApp or call for reservations & catering.
+              </p>
+            </div>
+          </div>
+          <div class="card" id="location" aria-label="Location">
+            <div class="inner">
+              <h3>Find Us</h3>
+              <p>12 Market Lane, Jubilee Hills, Hyderabad 500033</p>
+              <p>
+                <a
+                  href="https://maps.google.com/?q=12%20Market%20Lane%20Hyderabad"
+                  target="_blank"
+                  rel="noopener"
+                  style="color: var(--accent-2)"
+                  >Open in Google Maps</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="gallery-title">
+        <h2 id="gallery-title" class="visually-hidden">Gallery</h2>
+        <div class="grid gallery">
+          <img
+            src="https://images.unsplash.com/photo-1541534401786-2077eed87a74?q=80&w=800&auto=format&fit=crop"
+            alt="Cozy interior with wooden tables"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?q=80&w=800&auto=format&fit=crop"
+            alt="Chef plating a dish in the kitchen"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop"
+            alt="Table spread of shared plates and drinks"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?q=80&w=800&auto=format&fit=crop"
+            alt="Latte art in a ceramic cup"
+          />
+        </div>
+      </section>
+
+      <section id="contact" class="section" aria-labelledby="contact-title">
+        <h2 id="contact-title" class="visually-hidden">Contact Us</h2>
+        <div class="card">
+          <div class="inner">
+            <form
+              aria-describedby="contact-help"
+              action="#"
+              method="post"
+              onsubmit="event.preventDefault(); announce('Thanks! We\'ll get back to you shortly.'); this.reset();"
+            >
+              <div
+                class="grid"
+                style="
+                  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                  gap: 1rem;
+                "
+              >
+                <div>
+                  <label for="name">Name</label><br />
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    style="
+                      width: 100%;
+                      padding: 0.75rem;
+                      border-radius: 10px;
+                      border: 1px solid rgba(255, 255, 255, 0.2);
+                      background: rgba(0, 0, 0, 0.2);
+                      color: var(--text);
+                    "
+                  />
+                </div>
+                <div>
+                  <label for="email">Email</label><br />
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    style="
+                      width: 100%;
+                      padding: 0.75rem;
+                      border-radius: 10px;
+                      border: 1px solid rgba(255, 255, 255, 0.2);
+                      background: rgba(0, 0, 0, 0.2);
+                      color: var(--text);
+                    "
+                  />
+                </div>
+              </div>
+              <div style="margin-top: 1rem">
+                <label for="message">Message</label><br />
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                  style="
+                    width: 100%;
+                    padding: 0.75rem;
+                    border-radius: 10px;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    background: rgba(0, 0, 0, 0.2);
+                    color: var(--text);
+                  "
+                ></textarea>
+              </div>
+              <p
+                id="contact-help"
+                class="small"
+                style="margin: 0.5rem 0 0; color: var(--muted)"
+              >
+                We usually respond within a few hours.
+              </p>
+              <button
+                class="btn primary"
+                type="submit"
+                style="margin-top: 1rem"
+              >
+                Send
+              </button>
+              <div
+                id="live-region"
+                aria-live="polite"
+                class="small"
+                style="margin-top: 0.5rem; color: var(--accent-2)"
+              ></div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer role="contentinfo">
+      <div class="footer-inner">
+        <div class="small">
+          © <span id="year"></span> Rustic Spoon. All rights reserved.
+        </div>
+        <div class="small">
+          Designed for accessibility: WCAG-friendly colors, keyboard nav, alt
+          text, and skip links.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile nav toggle
+      const toggle = document.querySelector(".menu-toggle");
+      const mnav = document.getElementById("mobile-nav");
+      toggle?.addEventListener("click", () => {
+        const open = mnav.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", String(open));
+      });
+
+      // Live region announcements
+      function announce(msg) {
+        const el = document.getElementById("live-region");
+        if (el) {
+          el.textContent = msg;
+        }
+      }
+
+      // Year
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+    <style>
+      /* Visually hidden utility for headings used by screen readers */
+      .visually-hidden {
+        position: absolute !important;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+        clip: rect(1px, 1px, 1px, 1px);
+        white-space: nowrap;
+      }
+    </style>
+  </body>
+</html>
